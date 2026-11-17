@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>valei-me · Envie sua sugestão</title>
+<meta name="description" content="Sugira músicas católicas, o santo da semana e ideias de post para o @valeime.catolico">
+<meta property="og:title" content="valei-me · Envie sua sugestão">
+<meta property="og:description" content="Sugira músicas, o santo da semana e ideias de post para o @valeime.catolico">
+<meta property="og:image" content="https://valeime.netlify.app/logo.png">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F4;
+    --paper: #FFFFFF;
+    --ink: #1E1C20;
+    --muted: #6E6862;
+    --line: #E7E1D8;
+    --gold: #C6921C;
+    --rose: #CE506C;
+    --wine: #9E2A35;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Inter, system-ui, sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 40px 20px 56px; }
+
+  header { text-align: center; margin-bottom: 28px; }
+  .logo { width: 92px; height: auto; display: block; margin: 0 auto 14px; }
+  h1 {
+    font-family: Fraunces, serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    line-height: 1.05;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  h1 .gold { color: var(--gold); }
+  h1 .rose { color: var(--rose); }
+  h1 .wine { color: var(--wine); }
+  .lead { color: var(--muted); margin: 0 auto; max-width: 420px; }
+  .handle {
+    display: inline-block; margin-top: 14px;
+    font-family: Fraunces, serif; font-weight: 600;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(30, 28, 32, 0.05);
+  }
+
+  .tabs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: 14px; padding: 5px; margin-bottom: 22px;
+  }
+  .tabs input { position: absolute; opacity: 0; pointer-events: none; }
+  .tabs label {
+    text-align: center; padding: 11px 8px; border-radius: 10px;
+    font-weight: 600; cursor: pointer; color: var(--muted);
+    transition: background .2s, color .2s;
+  }
+  .tabs input:checked + label { background: var(--ink); color: #fff; }
+  .tabs input:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .field { margin-bottom: 16px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label.lbl { display: block; font-weight: 600; font-size: .92rem; margin-bottom: 6px; }
+  .opt { font-weight: 400; color: var(--muted); }
+  input[type=text], input[type=url], textarea, select {
+    width: 100%; font: inherit; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: 12px; padding: 12px 14px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  input:focus, textarea:focus, select:focus {
+    outline: none; border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(198, 146, 28, .18);
+  }
+  .hint { font-size: .82rem; color: var(--muted); margin-top: 5px; }
+  .hidden { display: none; }
+  .hp { position: absolute; left: -9999px; }
+
+  button {
+    width: 100%; border: 0; cursor: pointer;
+    background: var(--ink); color: #fff;
+    font: 600 1.05rem Inter, sans-serif;
+    padding: 15px; border-radius: 14px; margin-top: 6px;
+    transition: transform .15s, background .2s;
+  }
+  button:hover { background: #000; }
+  button:active { transform: scale(.98); }
+  button:disabled { opacity: .6; cursor: wait; }
+
+  .msg { margin-top: 14px; font-size: .92rem; text-align: center; }
+  .msg.err { color: var(--rose); }
+
+  .done { text-align: center; padding: 18px 4px; }
+  .done svg { width: 64px; height: 64px; margin-bottom: 10px; }
+  .done h2 { font-family: Fraunces, serif; font-weight: 900; font-size: 1.8rem; margin: 0 0 8px; }
+  .done p { color: var(--muted); margin: 0 0 18px; }
+  .done button { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+
+  footer { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 28px; }
+  footer .cross { color: var(--gold); }
+
+  @media (max-width: 440px) { .row { grid-template-columns: 1fr; } .card { padding: 20px; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <img class="logo" src="logo.png" alt="valei-me">
+    <h1>Sugira uma <span class="gold">música</span>,<br>um <span class="wine">santo</span> ou uma <span class="rose">ideia</span></h1>
+    <p class="lead">Tem uma música católica que merece virar edit, um santo que você quer ver no Santo da Semana ou uma ideia de post? Conte pra gente.</p>
+    <a class="handle" href="https://instagram.com/valeime.catolico" target="_blank" rel="noopener">@valeime.catolico</a>
+  </header>
+
+  <section class="card">
+    <form id="form" novalidate>
+      <div class="tabs" role="radiogroup" aria-label="Tipo de sugestão">
+        <input type="radio" name="tipo" id="t-musica" value="Música" checked>
+        <label for="t-musica">♪ Música</label>
+        <input type="radio" name="tipo" id="t-santo" value="Santo da semana">
+        <label for="t-santo">✦ Santo</label>
+        <input type="radio" name="tipo" id="t-post" value="Ideia de post">
+        <label for="t-post">✝ Post</label>
+      </div>
+
+      <div id="santo-fields" class="hidden">
+        <div class="field">
+          <label class="lbl" for="santo">Qual santo?</label>
+          <input type="text" id="santo" name="santo" placeholder="Ex.: São Miguel Arcanjo, Santa Teresinha…">
+        </div>
+      </div>
+
+      <div id="musica-fields">
+        <div class="row">
+          <div class="field">
+            <label class="lbl" for="musica">Nome da música</label>
+            <input type="text" id="musica" name="musica" placeholder="Ex.: Minha Herança">
+          </div>
+          <div class="field">
+            <label class="lbl" for="artista">Artista</label>
+            <input type="text" id="artista" name="artista" placeholder="Ex.: Colo de Deus">
+          </div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="link">Link <span class="opt">(opcional)</span></label>
+          <input type="url" id="link" name="link" placeholder="YouTube, Spotify…">
+        </div>
+        <div class="field">
+          <label class="lbl" for="trecho">Qual parte usar? <span class="opt">(opcional)</span></label>
+          <input type="text" id="trecho" name="trecho" placeholder="Ex.: o refrão, ou a partir de 2:10">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="ideia" id="ideia-lbl">Por que essa música? <span class="opt">(opcional)</span></label>
+        <textarea id="ideia" name="ideia" placeholder="Conte o que ela significa pra você…"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl" for="nome">Seu nome <span class="opt">(opcional)</span></label>
+          <input type="text" id="nome" name="nome" autocomplete="name">
+        </div>
+        <div class="field">
+          <label class="lbl" for="instagram">Seu @ <span class="opt">(opcional)</span></label>
+          <input type="text" id="instagram" name="instagram" placeholder="@seuperfil">
+        </div>
+      </div>
+      <p class="hint">Se quiser, a gente te marca quando o post sair 🤍</p>
+
+      <input class="hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <button type="submit" id="send">Enviar sugestão</button>
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="done hidden" id="done">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#C6921C" stroke-width="3" stroke-linecap="round">
+        <path d="M32 8v48M18 22h28"/>
+      </svg>
+      <h2>Recebido!</h2>
+      <p>Obrigado pela sugestão. Deus abençoe!</p>
+      <button type="button" id="again">Enviar outra</button>
+    </div>
+  </section>
+
+  <footer><span class="cross">✝</span> Valei-me, São José!</footer>
+</main>
+
+<script>
+  // Cole aqui a URL do Apps Script (ver apps-script.gs)
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxS4hWLuNMjVsmNnGSTxThmx7OzA-rjuUDU4M8Pn-e0gmFv5v_nCbr51yRJsS8rKDs/exec';
+
+  const form = document.getElementById('form');
+  const msg = document.getElementById('msg');
+  const send = document.getElementById('send');
+  const musicaFields = document.getElementById('musica-fields');
+  const santoFields = document.getElementById('santo-fields');
+  const ideia = document.getElementById('ideia');
+  const ideiaLbl = document.getElementById('ideia-lbl');
+
+  const TIPOS = {
+    'Música': {
+      lbl: 'Por que essa música? <span class="opt">(opcional)</span>',
+      ph: 'Conte o que ela significa pra você…',
+    },
+    'Santo da semana': {
+      lbl: 'Por que esse santo? <span class="opt">(opcional)</span>',
+      ph: 'Ex.: é meu santo de devoção, a festa dele é nesta semana…',
+    },
+    'Ideia de post': {
+      lbl: 'Qual é a sua ideia?',
+      ph: 'Ex.: um post sobre São José com uma frase de esperança…',
+    },
+  };
+  const tipoAtual = () => form.querySelector('input[name=tipo]:checked').value;
+
+  function updateTipo() {
+    const tipo = tipoAtual();
+    musicaFields.classList.toggle('hidden', tipo !== 'Música');
+    santoFields.classList.toggle('hidden', tipo !== 'Santo da semana');
+    ideiaLbl.innerHTML = TIPOS[tipo].lbl;
+    ideia.placeholder = TIPOS[tipo].ph;
+    msg.textContent = '';
+  }
+  form.querySelectorAll('input[name=tipo]').forEach(r => r.addEventListener('change', updateTipo));
+
+  function erro(texto, campo) {
+    msg.className = 'msg err'; msg.textContent = texto;
+    campo.focus();
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.className = 'msg'; msg.textContent = '';
+    const data = new FormData(form);
+    if (data.get('site')) return;
+    const tipo = data.get('tipo');
+    if (tipo === 'Música' && !data.get('musica').trim()) {
+      return erro('Diga o nome da música 🙂', document.getElementById('musica'));
+    }
+    if (tipo === 'Santo da semana' && !data.get('santo').trim()) {
+      return erro('Diga o nome do santo 🙂', document.getElementById('santo'));
+    }
+    if (tipo === 'Ideia de post' && !data.get('ideia').trim()) {
+      return erro('Escreva sua ideia 🙂', ideia);
+    }
+    if (tipo !== 'Música') ['musica', 'artista', 'link', 'trecho'].forEach(k => data.set(k, ''));
+    if (tipo !== 'Santo da semana') data.set('santo', '');
+    data.delete('site');
+
+    send.disabled = true; send.textContent = 'Enviando…';
+    try {
+      await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) });
+      form.reset(); updateTipo();
+      form.classList.add('hidden');
+      document.getElementById('done').classList.remove('hidden');
+    } catch (err) {
+      msg.className = 'msg err';
+      msg.textContent = 'Não foi possível enviar agora. Tente de novo em instantes.';
+    } finally {
+      send.disabled = false; send.textContent = 'Enviar sugestão';
+    }
+  });
+
+  document.getElementById('again').addEventListener('click', () => {
+    document.getElementById('done').classList.add('hidden');
+    form.classList.remove('hidden');
+  });
+</script>
+</body>
+</html>
